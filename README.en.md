@@ -1,7 +1,7 @@
 
 # Fixing Network Issues in WSL2
 
-[Click here for the Portuguese version](README.md)
+[Clique aqui para a versão em português](README.md)
 
 ## Problem
 
