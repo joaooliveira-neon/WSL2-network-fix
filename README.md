@@ -1,5 +1,7 @@
 # Consertando Problema de Rede no WSL2
 
+[Click here for English version](README.en.md)
+
 ## Problema
 
 Se suas máquinas virtuais em WSL2 não conseguem se conectar à internet, pode ser por duas principais razões:
@@ -7,7 +9,7 @@ Se suas máquinas virtuais em WSL2 não conseguem se conectar à internet, pode 
 1. O DNS não está funcionando.
 2. O WSL2 não consegue se conectar à internet de forma geral.
 
-Para testar, rode o comando `curl 142.250.189.206` (este é um IP de um servidor do Google). A saída deve ser algo como:
+Para testar, dentro do WSL2 rode o comando `curl 142.250.189.206` (este é um IP de um servidor do Google). A saída deve ser algo como:
 
 ```
 joao@NL-BD4V0N3:~$ curl 142.250.189.206
@@ -32,7 +34,7 @@ nameserver 10.255.255.254
 search neon.local
 ```
 
-Se não funcionar, aqui está outra configuração que foi gerada automaticamente para um colega:
+Se não funcionar, aqui está outra configuração que foi gerada automaticamente para um colega aqui da Neon, essa também funciona:
 
 ```
 nameserver 10.9.81.238
@@ -62,14 +64,14 @@ Se nem o DNS nem o acesso direto via IP estiver funcionando, o problema pode est
    Acesse a página de [lançamentos do wsl-vpnkit](https://github.com/sakai135/wsl-vpnkit/releases/latest) e baixe o arquivo `wsl-vpnkit.tar.gz`.
 
 2. **Importe a distribuição do wsl-vpnkit:**
-   Abra o terminal do PowerShell e execute:
+   Abra o terminal do PowerShell, vá até o diretório onde o arquivo `wsl-vpnkit.tar.gz` foi baixado e execute:
    ```
    wsl --import wsl-vpnkit --version 2 $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz
    ```
    Isso criará uma nova distribuição WSL2 chamada `wsl-vpnkit`.
 
 3. **Inicie o wsl-vpnkit:**
-   No terminal, execute:
+   No terminal do PowerShell, execute:
    ```
    wsl.exe -d wsl-vpnkit --cd /app wsl-vpnkit
    ```
