@@ -25,6 +25,44 @@ Se isso funcionou, o problema é com o DNS. Se não funcionou, o problema é com
 
 ---
 
+## Solução para problemas de rede em geral
+
+Se nem o DNS nem o acesso direto via IP estiver funcionando, o problema pode estar relacionado à compatibilidade entre o WSL2 e algumas VPNs. Para resolver, você pode usar o projeto [wsl-vpnkit](https://github.com/sakai135/wsl-vpnkit), que resolve esse problema criando uma interface de rede virtual dedicada para o WSL2.
+
+### Como Configurar o wsl-vpnkit
+
+1. **Baixe o arquivo mais recente:**
+   Acesse a página de [lançamentos do wsl-vpnkit](https://github.com/sakai135/wsl-vpnkit/releases/latest) e baixe o arquivo `wsl-vpnkit.tar.gz`.
+
+2. **Importe a distribuição do wsl-vpnkit:**
+   Abra o terminal do PowerShell, vá até o diretório onde o arquivo `wsl-vpnkit.tar.gz` foi baixado e execute:
+   ```
+   wsl --import wsl-vpnkit --version 2 $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz
+   ```
+   Isso criará uma nova distribuição WSL2 chamada `wsl-vpnkit`.
+
+3. **Inicie o wsl-vpnkit:**
+   No terminal do PowerShell, execute:
+   ```
+   wsl.exe -d wsl-vpnkit --cd /app wsl-vpnkit
+   ```
+   O processo será iniciado e deve permanecer em execução. Você pode minimizar a janela ou rodar o processo em segundo plano.
+
+4. **Teste a conexão:**
+   Abra uma máquina WSL2 e verifique se a internet está funcionando.
+
+---
+
+### Observações
+
+1. Estou utilizando o Ubuntu 24.04 no WSL2.
+2. Meu arquivo `wsl.conf` está vazio (não precisei configurar nada nele).
+
+### Sugestão
+
+Faça um script ou algo do tipo pra rodar automaticamente quando alguma máquina WSL2 for iniciada.
+
+
 ## Solução para problema de DNS
 
 Caso o problema esteja no DNS, você pode precisar ajustar o arquivo `/etc/resolv.conf`. O `resolv.conf` que funciona para mim foi criado automaticamente pelo WSL2 e possui o seguinte conteúdo:
@@ -53,40 +91,3 @@ generateResolvConf = false
 Para mais informações, veja a [documentação oficial do WSL](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#wslconf).
 
 ---
-
-## Solução para problemas de rede
-
-Se nem o DNS nem o acesso direto via IP estiver funcionando, o problema pode estar relacionado à compatibilidade entre o WSL2 e algumas VPNs. Para resolver, você pode usar o projeto [wsl-vpnkit](https://github.com/sakai135/wsl-vpnkit), que resolve esse problema criando uma interface de rede virtual dedicada para o WSL2.
-
-### Como Configurar o wsl-vpnkit
-
-1. **Baixe o arquivo mais recente:**
-   Acesse a página de [lançamentos do wsl-vpnkit](https://github.com/sakai135/wsl-vpnkit/releases/latest) e baixe o arquivo `wsl-vpnkit.tar.gz`.
-
-2. **Importe a distribuição do wsl-vpnkit:**
-   Abra o terminal do PowerShell, vá até o diretório onde o arquivo `wsl-vpnkit.tar.gz` foi baixado e execute:
-   ```
-   wsl --import wsl-vpnkit --version 2 $env:USERPROFILE\wsl-vpnkit wsl-vpnkit.tar.gz
-   ```
-   Isso criará uma nova distribuição WSL2 chamada `wsl-vpnkit`.
-
-3. **Inicie o wsl-vpnkit:**
-   No terminal do PowerShell, execute:
-   ```
-   wsl.exe -d wsl-vpnkit --cd /app wsl-vpnkit
-   ```
-   O processo será iniciado e deve permanecer em execução. Você pode minimizar a janela ou rodar o processo em segundo plano.
-
-4. **Teste a conexão:**
-   Abra uma máquina WSL2 e verifique se a internet está funcionando.
-
----
-
-## Observações
-
-1. Estou utilizando o Ubuntu 24.04 no WSL2.
-2. Meu arquivo `wsl.conf` está vazio (não precisei configurar nada nele).
-
-## Sugestão
-
-Faça um script ou algo do tipo pra rodar automaticamente quando alguma máquina WSL2 for iniciada.
