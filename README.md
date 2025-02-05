@@ -68,20 +68,13 @@ Faça um script ou algo do tipo pra rodar automaticamente quando alguma máquina
 Caso o problema esteja no DNS, você pode precisar ajustar o arquivo `/etc/resolv.conf`. O `resolv.conf` que funciona para mim foi criado automaticamente pelo WSL2 e possui o seguinte conteúdo:
 
 ```
-nameserver 10.255.255.254
-search neon.local
-```
-
-Se não funcionar, aqui está outra configuração que foi gerada automaticamente para um colega aqui da Neon, essa também funciona:
-
-```
 nameserver 10.9.81.238
 nameserver 10.9.50.245
 nameserver 172.26.21.112
 ```
 
 **Dica:**
-Certifique-se de que o arquivo `/etc/wsl.conf` está configurado para evitar a substituição automática do `resolv.conf`. Adicione as seguintes linhas, se necessário:
+Se for alterar o `resolv.conf`, certifique-se de que o arquivo `/etc/wsl.conf` está configurado para evitar a substituição automática do `resolv.conf`. Adicione as seguintes linhas, se necessário:
 
 ```
 [network]
